@@ -1,71 +1,67 @@
 code {
-  font-family: input-mono, monospace;
+  font-family: "Roboto Mono", monospace;
   font-weight: 400;
   font-style: normal;
 }
 
 ::-webkit-scrollbar {
-  height: 5px;
-  width: 5px;
-  background: var(--background);
+  height: 6px;
+  width: 6px;
+  background: var(--color-surface);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  -webkit-border-radius: 1ex;
+  background: var(--color-accent);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-corner {
-  background: var(--background);
+  background: var(--color-surface);
 }
 
 html {
-  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
-h1 {
-  font-size: 56px;
-  font-weight: 700;
-  letter-spacing: -3px;
-  line-height: 1.2;
-  text-align: center;
-  margin: 100px 0;
-}
-
-h2 {
-  margin: 0;
-  color: var(--accent);
-  left: calc(50% + 130px);
-  font-size: 56px;
-  font-weight: 700;
-  letter-spacing: -3px;
-  line-height: 1.2;
-  position: absolute;
-}
-
-section {
-  height: max-content;
+.home-section {
+  min-height: 100vh;
+  box-sizing: border-box;
   display: flex;
-  justify-content: left;
   align-items: center;
+  justify-content: center;
   position: relative;
-  scroll-snap-align: center;
-  perspective: 500px;
+  padding: 5rem 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-section > div {
-  position: relative;
-
-  margin: 20px;
-
-  overflow: hidden;
+.home-section > .section-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .progress {
   position: fixed;
   left: 0;
   right: 0;
-  height: 5px;
-  background: red;
-  bottom: 100px;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-border));
+  transform-origin: left;
+  z-index: 50;
+  box-shadow: 0 0 12px rgba(245, 200, 87, 0.4);
+}
+
+@media (min-width: 768px) {
+  .home-section > .section-inner {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-section > .section-inner {
+    padding: 0 2.5rem;
+  }
 }

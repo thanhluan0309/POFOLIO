@@ -1,42 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, createContext, useContext } from "react";
 import Navbar from "../navbar/navbar";
 import ContentLeft from "../ContentLeft/ContentLeft";
+import Background from "../Background/Background";
 import Aos from "aos";
-const Base = ({ children }) => {
+
+export const ScrollContainerContext = createContext(null);
+
+function Base({ children }) {
+  const scrollContainerRef = useRef(null);
+
   useEffect(() => {
     Aos.init({
-      duration: 2000, // Thời gian animation (ms)
-      once: true, // Chỉ chạy animation một lần khi cuộn
-      delay: 200, // Độ trễ trước khi animation bắt đầu (ms)
+      duration: 1200,
+      once: true,
+      delay: 150,
     });
   }, []);
-  const childrenWithProps = React.Children.map(children, (child) =>
-    React.cloneElement(child, {})
-  );
 
   return (
     <>
-      <div className="bg-[#0e0e0e] w-full h-max flex">
-        <div className="w-full items-center justify-center m-auto">
-          <div
-            // style={{
-            //   backgroundImage:
-            //     "url(https://i.pinimg.com/736x/56/48/d5/5648d5f4185b49b09aa5b931bcbe2fad.jpg)",
-            //   backgroundPosition: "center",
-            //   backgroundRepeat: "no-repeat",
-            //   // objectFit: "cover",
-            //   backgroundSize: "cover",
-            // }}
-            className=" w-full h-[100vh]  flex flex-col justify-start"
-          >
-            <ContentLeft></ContentLeft>
-            <Navbar></Navbar>
-            <div className=" h-auto bg-[#0e0e0e]"> {childrenWithProps}</div>
+      <Background />
+      <div className="relative bg-surface/95 w-full h-screen flex">
+        <div className="w-full m-auto h-full flex min-h-0">
+          <div className="w-full h-full flex flex-col min-h-0">
+            <ContentLeft />
+            <Navbar />
+            <main
+              ref={scrollContainerRef}
+              className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden snap-y snap-mandatory"
+            >
+              <ScrollContainerContext.Provider value={scrollContainerRef}>
+                {children}
+              </ScrollContainerContext.Provider>
+            </main>
           </div>
         </div>
       </div>
     </>
   );
-};
+}
 
 export default Base;

@@ -1,61 +1,67 @@
-// Photos from https://citizenofnowhe.re/lines-of-the-city
-import { useEffect, useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useEffect, useContext } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { ScrollContainerContext } from "../../component/Base/Base";
 import Profile from "./Profile";
-import EXPERIENCE from "./Experience";
+import Experience from "./Experience";
 import ContactPage from "./Contact";
 import "./style.css";
 
-function useParallax(value, distance) {
-  return useTransform(value, [0, 1], [-distance, distance]);
-}
+const sectionVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1 },
+  }),
+};
 
-const Breadcumbs = [
-  {
-    name: "My CV",
-    content: <Profile></Profile>,
-  },
-  {
-    name: "EXPERIENCE",
-    content: <EXPERIENCE></EXPERIENCE>,
-  },
-  {
-    name: "Contact",
-    content: <ContactPage></ContactPage>,
-  },
-];
-function Image({ id, Content, name }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 0);
-
+function HomeSection({ id, children, index = 0 }) {
   return (
-    <div className="flex flex-col justify-start mb-52">
-      {/* <h2 class="text-4xl font-bold text-white text-center underline decoration-4 decoration-purple-600 hover:decoration-blue-500 transition-all duration-300">
-        {name}
-      </h2> */}
-
-      <section ref={ref}>{Content}</section>
-    </div>
+    <motion.section
+      id={id}
+      className="home-section"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={sectionVariants}
+      custom={index}
+    >
+      <div className="section-inner">{children}</div>
+    </motion.section>
   );
 }
 
 export default function HomePage() {
-  const { scrollYProgress } = useScroll();
+  const scrollContainerRef = useContext(ScrollContainerContext);
+  const { scrollYProgress } = useScroll({
+    container: scrollContainerRef,
+    layoutEffect: false,
+  });
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
-      {Breadcumbs.map((item, index) => (
-        <Image Content={item?.content} name={item?.name} />
-      ))}
-      <motion.div className="progress" style={{ scaleX }} />
+      <HomeSection id="profile" index={0}>
+        <Profile />
+      </HomeSection>
+
+      <HomeSection id="experience" index={1}>
+        <Experience />
+      </HomeSection>
+
+      <HomeSection id="contact" index={2}>
+        <ContactPage />
+      </HomeSection>
+
+      <motion.div className="progress" style={{ scaleX }} aria-hidden="true" />
     </>
   );
 }

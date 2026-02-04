@@ -1,73 +1,149 @@
+import { useCallback } from "react";
+import { motion } from "framer-motion";
 import MyAvatar from "../../assets/img/avatar.png";
-import myCv from "../../assets/cv/CV_FULLSTACK-DEVELOPER .pdf";
-const Profile = () => {
+import TypingCode from "../../component/Typing/Json";
+import ShinyText from "../../component/Title/ShinyText";
+import ProfileCard from "../../component/Card/ProfileCard";
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06, delayChildren: 0.05 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0 },
+};
+
+function Profile() {
+  const openResume = useCallback(() => {
+    window.open(
+      "https://drive.google.com/file/d/1-wtlvptgCaxkl-JZmMeY723sI2tvqugH/view?usp=sharing",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  }, []);
+
+  const scrollToExperience = useCallback(() => {
+    document
+      .getElementById("experience")
+      ?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   return (
-    <div className="flex flex-col w-full">
-      {" "}
-      <div className=" md:mt-24 grid grid-cols-1 md:grid-cols-2  items-center px-4 sm:px-8 lg:px-16">
-        {/* Avatar Section */}
-        <div
-          data-aos="fade-right"
-          className="order-2 md:order-1 relative flex items-center justify-center"
+    <motion.div
+      className="flex flex-col w-full"
+      variants={container}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Row: ProfileCard trái, nội dung phải */}
+      <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-center gap-8 md:gap-12 py-6 md:py-10">
+        <motion.div
+          variants={item}
+          className="flex justify-center md:justify-start"
         >
-          <svg
-            className="absolute z-[-1] 
-      w-40 h-40 sm:w-56 sm:h-56 
-      md:w-72 md:h-72 
-      lg:w-[700px] lg:h-[700px]"
-            viewBox="0 0 200 200"
-            xmlns="http://www.w3.org/2000/svg"
+          <ProfileCard
+            avatarUrl={MyAvatar}
+            name="Lê Trần Thành Luân"
+            title="Creative Developer"
+            handle="thanhluan"
+            status="Available"
+            contactText="Open my resume"
+            showUserInfo
+            enableTilt
+            onContactClick={openResume}
+            className="max-w-[min(90vw,380px)]"
+          />
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          className="flex flex-col gap-3 text-center md:text-left"
+        >
+          <motion.p
+            variants={item}
+            className="typography-caption uppercase tracking-widest text-primaryLight/90"
           >
-            <path
-              fill="#BAE6FF"
-              d="M43.8,-37.6C55,-20.9,61.1,-2.8,57.9,14C54.7,30.8,42.2,46.2,26.2,53.5C10.2,60.9,-9.2,60.2,-28.9,53.3C-48.7,46.4,-68.8,33.3,-72.5,16.7C-76.2,0,-63.5,-20.2,-48.7,-37.8C-33.9,-55.3,-16.9,-70.1,-0.3,-69.9C16.3,-69.6,32.6,-54.3,43.8,-37.6Z"
-              transform="translate(100 100)"
+            Full‑stack Developer
+          </motion.p>
+          <motion.h1
+            variants={item}
+            className="typography-heading-1 text-primaryPale"
+          >
+            Creative Developer
+          </motion.h1>
+          <motion.p
+            variants={item}
+            className="typography-body text-primaryPale/90 max-w-xl"
+          >
+            <ShinyText
+              text="Sensible to Front End, designing with passion and precision."
+              speed={6}
+              className="italic"
             />
-          </svg>
-          <img
-            className="w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-[700px] lg:h-[700px] object-cover rounded-3xl hover:scale-105 transition-transform duration-500"
-            src={MyAvatar}
-            alt="My Avatar"
+          </motion.p>
+          <motion.p
+            variants={item}
+            className="typography-body text-primaryPale/90 max-w-xl"
+          >
+            <ShinyText
+              text="Solid on the Back End—scalable APIs, clean architecture, systems that just work."
+              speed={6}
+              className="italic"
+            />
+          </motion.p>
+          <motion.p
+            variants={item}
+            className="typography-body text-primaryPale/85 max-w-xl"
+          >
+            <ShinyText
+              text="Let's build something amazing together!"
+              speed={6}
+              className="italic"
+            />
+          </motion.p>
+          <motion.div variants={item}>
+            <motion.button
+              type="button"
+              onClick={openResume}
+              className="mt-1 px-5 py-2.5 rounded-lg bg-primaryMed hover:bg-primaryLight text-surface font-semibold text-body-sm transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Open my resume
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Coder intro: const me = { ... } */}
+      <motion.section
+        variants={item}
+        className="mt-6 md:mt-10 flex flex-col gap-2"
+        aria-label="About me in code"
+      >
+        <div className="flex items-center gap-2">
+          <span className="typography-caption uppercase tracking-wider text-primaryLight/70 font-mono">
+            me.js
+          </span>
+          <span
+            className="h-px flex-1 max-w-24 bg-border/60"
+            aria-hidden="true"
           />
         </div>
-
-        {/* Text Section */}
-        <div
-          data-aos="fade-up"
-          className="order-1 md:order-2 flex flex-col gap-8 text-white text-center md:text-left p-6 sm:p-8 "
-        >
-          {/* Heading */}
-          <span className="text-5xl sm:text-5xl md:text-5xl lg:text-8xl xl:text-9xl break-words font-extrabold uppercase text-gray-200">
-            CREATIVE
-          </span>
-
-          {/* Subtitle */}
-          <span className="text-3xl sm:text-2xl md:text-lg lg:text-4xl font-semibold tracking-widest uppercase text-gray-200">
-            D E V E L O P E R
-          </span>
-
-          {/* Description */}
-          <span className="text-lg sm:text-xl md:text-lg  lg:text-3xl font-light italic tracking-wide text-gray-300 max-w-full md:max-w-2xl mx-auto md:mx-0">
-            Sensible to Front End, designing with passion and precision. Let’s
-            build something amazing together!
-          </span>
-          <div className="flex w-full">
-            <a
-              // href={myCv}
-              // download="CV_FULLSTACK-DEVELOPER.pdf"
-              class="cursor-pointer m-auto bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition-colors duration-300"
-              onClick={() => {
-                window.open(
-                  "https://drive.google.com/file/d/16S98fuDhHCh8xylfkLd0duemu9ggiqlp/view?usp=sharing"
-                );
-              }}
-            >
-              OPEN MY RESUME
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+        <TypingCode
+          isVisible={false}
+          setIsVisible={() => {}}
+          onViewMore={scrollToExperience}
+          autoShow
+        />
+      </motion.section>
+    </motion.div>
   );
-};
+}
+
 export default Profile;

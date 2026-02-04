@@ -6,7 +6,7 @@ const Intro = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
-    <div className="App w-full h-[100vh] bg-[#141b2d] flex ">
+    <div className="App w-full h-[100vh] bg-primary flex ">
       <div className="m-auto">
         <TypingMyself
           isVisible={isVisible}

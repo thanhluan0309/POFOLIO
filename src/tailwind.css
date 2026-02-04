@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Typography scale: use text-display | text-heading-1 | text-heading-2 | text-heading-3 | text-body-lg | text-body | text-body-sm | text-caption */
+@layer components {
+  .typography-display {
+    @apply text-display font-extrabold text-primaryPale uppercase tracking-tight;
+  }
+  .typography-heading-1 {
+    @apply text-heading-1 font-bold text-primaryPale;
+  }
+  .typography-heading-2 {
+    @apply text-heading-2 font-semibold text-primaryPale;
+  }
+  .typography-heading-3 {
+    @apply text-heading-3 font-semibold text-primaryPale;
+  }
+  .typography-body-lg {
+    @apply text-body-lg text-primaryPale;
+  }
+  .typography-body {
+    @apply text-body text-primaryPale;
+  }
+  .typography-body-sm {
+    @apply text-body-sm text-muted;
+  }
+  .typography-caption {
+    @apply text-caption text-muted;
+  }
+  .section-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .card-surface {
+    @apply bg-surfaceCard border border-border rounded-2xl shadow-xl;
+  }
+}

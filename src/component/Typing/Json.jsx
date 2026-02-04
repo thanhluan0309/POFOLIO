@@ -1,34 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
-const TypingCode = ({ isVisible, setIsVisible }) => {
-  let nav = useNavigate();
-  const [IsShow, setIsShow] = useState(false);
+const TypingCode = ({
+  isVisible,
+  setIsVisible,
+  onViewMore,
+  autoShow = false,
+}) => {
+  const nav = useNavigate();
+  const handleViewMore = () => {
+    if (onViewMore) onViewMore();
+    else nav("/");
+  };
+  const [IsShow, setIsShow] = useState(autoShow);
   const [showButton, setShowButton] = useState(false);
-  const [hasAlerted, setHasAlerted] = useState(false);
+  const [hasAlerted, setHasAlerted] = useState(autoShow);
 
   useEffect(() => {
-    // Kiểm tra nếu đã trigger alert thì không làm gì nữa
     if (hasAlerted) return;
-
-    // Thiết lập setTimeout để trigger alert sau 3 giây
+    if (autoShow) {
+      setIsShow(true);
+      setHasAlerted(true);
+      return;
+    }
     let timer;
     if (!isVisible) {
       timer = setTimeout(() => {
         setIsShow(true);
-        setHasAlerted(true); // Cập nhật trạng thái đã alert
-      }, 2000); // 3 giây = 3000ms
+        setHasAlerted(true);
+      }, 2000);
     }
-
-    // Cleanup: nếu component unmount hoặc trước khi trigger alert thì xóa timer
     return () => clearTimeout(timer);
-  }, [hasAlerted, isVisible]); // Chạy lại effect chỉ khi `hasAlerted` thay đổi
+  }, [hasAlerted, isVisible, autoShow]);
+
+  const isCoderStyle = autoShow;
 
   return (
-    <div>
+    <div className={isCoderStyle ? "w-full" : ""}>
       <div
-        className={`flex flex-col gap-2 items-start p-4 w-fit  text-[#141b2d] rounded-md transition-colors  duration-1000 transform ${
-          isVisible ? " bg-red-400" : "bg-[#1f2a40]"
+        className={`flex flex-col gap-2 items-start rounded-lg transition-colors duration-500 ${
+          isCoderStyle
+            ? "w-full p-4 md:p-5 bg-surfaceElevated border border-border/80 text-left font-mono text-body-sm md:text-body"
+            : `p-4 w-fit text-primaryPale rounded-md ${
+                isVisible ? "bg-primaryLight" : "bg-primaryMed"
+              }`
         }`}
       >
         {IsShow ? (
@@ -294,12 +309,13 @@ const TypingCode = ({ isVisible, setIsVisible }) => {
       </div>
 
       <button
-        className={`text-[10px] md:text-xl mt-4 rounded-sm bg-emerald-300 pl-4 pr-4 pt-2 pb-2 font-semibold shadow-md text-[#393E40] transition-transform duration-700 transform ${
-          showButton ? "scale-100" : "scale-0"
+        type="button"
+        className={`text-body-sm md:text-body mt-4 rounded-lg border border-border bg-transparent hover:bg-primaryMed/20 text-primaryPale font-medium px-4 py-2 transition-all duration-300 ${
+          showButton ? "scale-100 opacity-100" : "scale-0 opacity-0"
+        } ${
+          isCoderStyle ? "border-primaryLight/50 hover:border-primaryLight" : ""
         }`}
-        onClick={() => {
-          nav("/home");
-        }}
+        onClick={handleViewMore}
       >
         View more
       </button>

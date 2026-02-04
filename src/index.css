@@ -1,8 +1,15 @@
+:root {
+  --color-surface: #1a1008;
+  --color-surface-elevated: #2d1f0f;
+  --color-accent: #f5c857;
+  --color-border: #ffee91;
+  --color-pale: #abe0f0;
+  --color-primary: #e2852e;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Roboto Mono", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
