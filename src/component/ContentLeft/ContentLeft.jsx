@@ -5,12 +5,12 @@ const SOCIAL_LINKS = [
     icon: "fab fa-github",
     bgClass: "bg-primary",
   },
-  {
-    href: "https://www.facebook.com/profile.php?id=100008443060908",
-    label: "Facebook",
-    icon: "fab fa-facebook-f",
-    bgClass: "bg-primaryMed",
-  },
+  // {
+  //   href: "https://www.facebook.com/profile.php?id=100008443060908",
+  //   label: "Facebook",
+  //   icon: "fab fa-facebook-f",
+  //   bgClass: "bg-primaryMed",
+  // },
   {
     href: "https://www.linkedin.com/in/l%C3%AA-tr%E1%BA%A7n-th%C3%A0nh-lu%C3%A2n-2b75b723b/",
     label: "LinkedIn",
