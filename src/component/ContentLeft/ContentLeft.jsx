@@ -35,7 +35,9 @@ function ContentLeft() {
           aria-label={label}
         >
           <div
-            className={`flex items-center justify-center w-11 h-11 ${bgClass} text-white rounded-lg transition-transform duration-300 group-hover:scale-110`}
+            className={`flex items-center justify-center w-11 h-11 ${bgClass} ${
+              label === "LinkedIn" ? "text-black" : "text-white"
+            } rounded-lg transition-transform duration-300 group-hover:scale-110`}
           >
             <i className={`${icon} text-body`} aria-hidden="true" />
           </div>

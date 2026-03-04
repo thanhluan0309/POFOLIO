@@ -36,7 +36,7 @@ function ContactPage() {
           {CONTACT_ITEMS.map((item) => (
             <li key={item.label} className="flex items-center gap-4">
               <div
-                className={`flex-shrink-0 w-12 h-12 rounded-xl ${item.iconBg} text-white flex items-center justify-center`}
+                className={`flex-shrink-0 w-12 h-12 rounded-xl ${item.iconBg} text-black flex items-center justify-center`}
                 aria-hidden="true"
               >
                 <i
