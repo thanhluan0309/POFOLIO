@@ -25,6 +25,15 @@ const adjust = (value, fromMin, fromMax, toMin, toMax) =>
 const easeInOutCubic = (x) =>
   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 
+const prefersReducedMotion = () => {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  try {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch {
+    return false;
+  }
+};
+
 function ProfileCardComponent({
   avatarUrl = "",
   iconUrl = "",
@@ -47,7 +56,7 @@ function ProfileCardComponent({
   const cardRef = useRef(null);
 
   const animationHandlers = useMemo(() => {
-    if (!enableTilt) return null;
+    if (!enableTilt || prefersReducedMotion()) return null;
 
     let rafId = null;
 
@@ -182,17 +191,9 @@ function ProfileCardComponent({
     card.addEventListener("pointermove", pointerMoveHandler);
     card.addEventListener("pointerleave", pointerLeaveHandler);
 
-    const initialX = wrap.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET;
-    const initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
-
-    animationHandlers.updateCardTransform(initialX, initialY, card, wrap);
-    animationHandlers.createSmoothAnimation(
-      ANIMATION_CONFIG.INITIAL_DURATION,
-      initialX,
-      initialY,
-      card,
-      wrap
-    );
+    const centerX = wrap.clientWidth / 2;
+    const centerY = wrap.clientHeight / 2;
+    animationHandlers.updateCardTransform(centerX, centerY, card, wrap);
 
     return () => {
       card.removeEventListener("pointerenter", pointerEnterHandler);
@@ -271,7 +272,7 @@ function ProfileCardComponent({
   background-position: inherit;
   border-radius: inherit;
   transition: all 0.5s ease;
-  filter: contrast(2) saturate(2) blur(36px);
+  filter: contrast(1.8) saturate(1.8) blur(22px);
   transform: scale(0.8) translate3d(0, 0, 0.1px);
   background-size: 100% 100%;
   background-image: var(--behind-gradient);
@@ -284,7 +285,7 @@ function ProfileCardComponent({
 
 .pc-card-wrapper:hover::before,
 .pc-card-wrapper.active::before {
-  filter: contrast(1) saturate(2) blur(40px) opacity(1);
+  filter: contrast(1.1) saturate(1.9) blur(28px) opacity(1);
   transform: scale(0.9) translate3d(0, 0, 0.1px);
 }
 
@@ -296,8 +297,7 @@ function ProfileCardComponent({
   border-radius: var(--card-radius);
   position: relative;
   background-blend-mode: color-dodge, normal, normal, normal;
-  animation: glow-bg 12s linear infinite;
-  box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px) calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
+  box-shadow: rgba(0, 0, 0, 0.7) calc((var(--pointer-from-left) * 8px) - 2px) calc((var(--pointer-from-top) * 16px) - 5px) 14px -4px;
   transition: transform 1s ease;
   transform: translate3d(0, 0, 0.1px) rotateX(0deg) rotateY(0deg);
   background-size: 100% 100%;
@@ -336,7 +336,6 @@ function ProfileCardComponent({
   mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
   transition: filter 0.6s ease;
   filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
-  animation: holo-bg 18s linear infinite;
   mix-blend-mode: color-dodge;
 }
 
@@ -423,7 +422,7 @@ function ProfileCardComponent({
   position: absolute;
   inset: 0;
   z-index: 1;
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(18px);
   mask: linear-gradient(to bottom,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0) 60%,
@@ -441,8 +440,8 @@ function ProfileCardComponent({
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(26, 16, 8, 0.75);
-  backdrop-filter: blur(30px);
+  background: rgba(26, 16, 8, 0.82);
+  backdrop-filter: blur(16px);
   border: 1px solid rgba(245, 200, 87, 0.25);
   border-radius: 15px;
   padding: 12px 14px;
@@ -501,7 +500,7 @@ function ProfileCardComponent({
   background: rgba(226, 133, 46, 0.2);
   cursor: pointer;
   transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
 }
 
 .pc-contact-btn:hover {

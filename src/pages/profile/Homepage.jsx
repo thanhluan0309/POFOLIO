@@ -5,7 +5,6 @@ import Profile from "./Profile";
 import Experience from "./Experience";
 import ContactPage from "./Contact";
 import "./style.css";
-import { Skill } from "./Skill";
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 32 },
@@ -54,15 +53,11 @@ export default function HomePage() {
         <Profile />
       </HomeSection>
 
-      <HomeSection id="skill" index={1}>
-        <Skill />
-      </HomeSection>
-
-      <HomeSection id="experience" index={2}>
+      <HomeSection id="experience" index={1}>
         <Experience />
       </HomeSection>
 
-      <HomeSection id="contact" index={3}>
+      <HomeSection id="contact" index={2}>
         <ContactPage />
       </HomeSection>
 

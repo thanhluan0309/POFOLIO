@@ -201,7 +201,7 @@ class Media {
         void main() {
           vUv = uv;
           vec3 p = position;
-          p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
+          p.z = (sin(p.x * 4.0 + uTime) + cos(p.y * 2.0 + uTime)) * (0.06 + uSpeed * 0.28);
           gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
         }
       `,
@@ -357,6 +357,7 @@ class App {
   raf = 0;
   isDown = false;
   start = 0;
+  isRunning = true;
 
   constructor(
     container,
@@ -378,8 +379,46 @@ class App {
     this.onResize();
     this.createGeometry();
     this.createMedias(items, bend, textColor, borderRadius, font);
-    this.update();
+    this.setupVisibility();
     this.addEventListeners();
+  }
+
+  startLoop() {
+    if (this.raf) return;
+    this.isRunning = true;
+    this.raf = window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  stopLoop() {
+    this.isRunning = false;
+    if (this.raf) {
+      window.cancelAnimationFrame(this.raf);
+      this.raf = 0;
+    }
+  }
+
+  setupVisibility() {
+    try {
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          const e = entries[0];
+          if (!e) return;
+          const visible =
+            e.isIntersecting && document.visibilityState === "visible";
+          if (visible) this.startLoop();
+          else this.stopLoop();
+        },
+        { root: null, rootMargin: "0px", threshold: 0.1 }
+      );
+      this.observer.observe(this.container);
+    } catch (err) {
+      this.startLoop();
+    }
+    this.boundVisibility = () => {
+      if (document.visibilityState === "visible") this.startLoop();
+      else this.stopLoop();
+    };
+    document.addEventListener("visibilitychange", this.boundVisibility);
   }
 
   createRenderer() {
@@ -401,8 +440,8 @@ class App {
 
   createGeometry() {
     this.planeGeometry = new Plane(this.gl, {
-      heightSegments: 50,
-      widthSegments: 100,
+      heightSegments: 20,
+      widthSegments: 40,
     });
   }
 
@@ -531,6 +570,7 @@ class App {
   }
 
   update() {
+    if (!this.isRunning) return;
     this.scroll.current = lerp(
       this.scroll.current,
       this.scroll.target,
@@ -552,27 +592,39 @@ class App {
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     window.addEventListener("resize", this.boundOnResize);
-    window.addEventListener("mousewheel", this.boundOnWheel);
-    window.addEventListener("wheel", this.boundOnWheel);
-    window.addEventListener("mousedown", this.boundOnTouchDown);
-    window.addEventListener("mousemove", this.boundOnTouchMove);
-    window.addEventListener("mouseup", this.boundOnTouchUp);
-    window.addEventListener("touchstart", this.boundOnTouchDown);
-    window.addEventListener("touchmove", this.boundOnTouchMove);
-    window.addEventListener("touchend", this.boundOnTouchUp);
+    this.container.addEventListener("wheel", this.boundOnWheel, {
+      passive: true,
+    });
+    this.container.addEventListener("mousewheel", this.boundOnWheel, {
+      passive: true,
+    });
+    this.container.addEventListener("mousedown", this.boundOnTouchDown);
+    this.container.addEventListener("mousemove", this.boundOnTouchMove);
+    this.container.addEventListener("mouseup", this.boundOnTouchUp);
+    this.container.addEventListener("touchstart", this.boundOnTouchDown, {
+      passive: true,
+    });
+    this.container.addEventListener("touchmove", this.boundOnTouchMove, {
+      passive: false,
+    });
+    this.container.addEventListener("touchend", this.boundOnTouchUp);
   }
 
   destroy() {
-    window.cancelAnimationFrame(this.raf);
+    this.stopLoop();
+    if (this.observer && this.container)
+      this.observer.unobserve(this.container);
+    if (this.boundVisibility)
+      document.removeEventListener("visibilitychange", this.boundVisibility);
     window.removeEventListener("resize", this.boundOnResize);
-    window.removeEventListener("mousewheel", this.boundOnWheel);
-    window.removeEventListener("wheel", this.boundOnWheel);
-    window.removeEventListener("mousedown", this.boundOnTouchDown);
-    window.removeEventListener("mousemove", this.boundOnTouchMove);
-    window.removeEventListener("mouseup", this.boundOnTouchUp);
-    window.removeEventListener("touchstart", this.boundOnTouchDown);
-    window.removeEventListener("touchmove", this.boundOnTouchMove);
-    window.removeEventListener("touchend", this.boundOnTouchUp);
+    this.container.removeEventListener("wheel", this.boundOnWheel);
+    this.container.removeEventListener("mousewheel", this.boundOnWheel);
+    this.container.removeEventListener("mousedown", this.boundOnTouchDown);
+    this.container.removeEventListener("mousemove", this.boundOnTouchMove);
+    this.container.removeEventListener("mouseup", this.boundOnTouchUp);
+    this.container.removeEventListener("touchstart", this.boundOnTouchDown);
+    this.container.removeEventListener("touchmove", this.boundOnTouchMove);
+    this.container.removeEventListener("touchend", this.boundOnTouchUp);
     if (
       this.renderer &&
       this.renderer.gl &&

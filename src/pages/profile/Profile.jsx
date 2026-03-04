@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import MyAvatar from "../../assets/img/avatar.png";
 import TypingCode from "../../component/Typing/Json";
@@ -19,6 +19,15 @@ const item = {
 };
 
 function Profile() {
+  const [enableTilt, setEnableTilt] = useState(true);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setEnableTilt(!mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   const openResume = useCallback(() => {
     window.open(
       "https://drive.google.com/file/d/1-wtlvptgCaxkl-JZmMeY723sI2tvqugH/view?usp=sharing",
@@ -54,7 +63,7 @@ function Profile() {
             status="Available"
             contactText="Open my resume"
             showUserInfo
-            enableTilt
+            enableTilt={enableTilt}
             onContactClick={openResume}
             className="max-w-[min(90vw,380px)]"
           />
@@ -63,6 +72,7 @@ function Profile() {
         <motion.div
           variants={container}
           className="flex flex-col gap-3 text-center md:text-left"
+          viewport={{ once: true }}
         >
           <motion.p
             variants={item}
@@ -76,36 +86,29 @@ function Profile() {
           >
             Creative Developer
           </motion.h1>
-          <motion.p
-            variants={item}
-            className="typography-body text-primaryPale/90 max-w-xl"
-          >
-            <ShinyText
-              text="Sensible to Front End, designing with passion and precision."
-              speed={6}
-              className="italic"
-            />
-          </motion.p>
-          <motion.p
-            variants={item}
-            className="typography-body text-primaryPale/90 max-w-xl"
-          >
-            <ShinyText
-              text="Solid on the Back End—scalable APIs, clean architecture, systems that just work."
-              speed={6}
-              className="italic"
-            />
-          </motion.p>
-          <motion.p
-            variants={item}
-            className="typography-body text-primaryPale/85 max-w-xl"
-          >
-            <ShinyText
-              text="Let's build something amazing together!"
-              speed={6}
-              className="italic"
-            />
-          </motion.p>
+          <motion.div variants={item} className="flex flex-col gap-1">
+            <p className="typography-body text-primaryPale/90 max-w-xl">
+              <ShinyText
+                text="Sensible to Front End, designing with passion and precision."
+                speed={6}
+                className="italic"
+              />
+            </p>
+            <p className="typography-body text-primaryPale/90 max-w-xl">
+              <ShinyText
+                text="Solid on the Back End—scalable APIs, clean architecture, systems that just work."
+                speed={6}
+                className="italic"
+              />
+            </p>
+            <p className="typography-body text-primaryPale/85 max-w-xl">
+              <ShinyText
+                text="Let's build something amazing together!"
+                speed={6}
+                className="italic"
+              />
+            </p>
+          </motion.div>
           <motion.div variants={item}>
             <motion.button
               type="button"

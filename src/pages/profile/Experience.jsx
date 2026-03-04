@@ -57,6 +57,24 @@ function Experience() {
   return (
     <div className="w-full py-12 md:py-20">
       <div className="flex flex-col gap-12 md:gap-16">
+        <section className="flex flex-col gap-8" aria-label="Skills">
+          <Title content="Skills" />
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
+          >
+            <LogoLoop logos={SKILL_BADGES} />
+          </motion.div>
+        </section>
+
+        <div
+          className="border-t border-border/40 pt-16 md:pt-24"
+          role="separator"
+          aria-hidden
+        />
+
         <section className="flex flex-col gap-8" aria-label="Experience">
           <Title content="Experience" />
           <motion.div

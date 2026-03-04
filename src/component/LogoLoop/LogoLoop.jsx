@@ -22,12 +22,14 @@ function LogoLoop({ logos, className = "" }) {
 
 function LogoRow({ items, direction }) {
   const duplicated = [...items, ...items];
+
   return (
     <div className="relative w-full overflow-hidden">
       <div
         className="flex w-max gap-8 md:gap-12 items-center py-2"
         style={{
-          animation: `logo-loop-${direction} 40s linear infinite`,
+          animation: `logo-loop-${direction} 48s linear infinite`,
+          willChange: "transform",
         }}
       >
         {duplicated.map((item, i) => (
@@ -36,9 +38,10 @@ function LogoRow({ items, direction }) {
             className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-xl bg-surfaceElevated border border-border/80 p-2"
           >
             <img
-              src={item?.src}
-              alt=""
+              src={typeof item === "string" ? item : item.src}
+              alt={typeof item === "string" ? "" : item.name || ""}
               className="w-full h-full object-contain"
+              loading="lazy"
             />
           </div>
         ))}
