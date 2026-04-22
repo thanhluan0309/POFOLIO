@@ -115,7 +115,10 @@ export default function ChatBox() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        makeMsg("assistant", "Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau nhé!"),
+        makeMsg(
+          "assistant",
+          "Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau nhé!",
+        ),
       ]);
     } finally {
       setIsLoading(false);
@@ -146,84 +149,80 @@ export default function ChatBox() {
                   className="absolute inset-0 rounded-full bg-primaryMed/25 pointer-events-none"
                   initial={{ scale: 1, opacity: 0 }}
                   animate={{ scale: 2, opacity: [0, 0.5, 0] }}
-                  transition={{ repeat: Infinity, duration: 2.2, ease: "easeOut", repeatDelay: 0.3 }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2.2,
+                    ease: "easeOut",
+                    repeatDelay: 0.3,
+                  }}
                 />
                 <motion.span
                   className="absolute inset-0 rounded-full bg-primaryMed/15 pointer-events-none"
                   initial={{ scale: 1, opacity: 0 }}
                   animate={{ scale: 2.7, opacity: [0, 0.35, 0] }}
-                  transition={{ repeat: Infinity, duration: 2.2, delay: 0.5, ease: "easeOut", repeatDelay: 0.3 }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2.2,
+                    delay: 0.5,
+                    ease: "easeOut",
+                    repeatDelay: 0.3,
+                  }}
                 />
               </>
             )}
           </AnimatePresence>
 
           {/* Button */}
-          <motion.button
-            onClick={() => setIsOpen((v) => !v)}
-            className="relative w-14 h-14 rounded-full bg-primaryMed hover:bg-primaryLight text-surface shadow-lg shadow-primaryMed/40 flex items-center justify-center transition-colors duration-200"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", damping: 16, stiffness: 180, delay: 0.6 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.92 }}
-            aria-label={isOpen ? "Đóng chat" : "Mở chat AI"}
-          >
-          <AnimatePresence mode="wait" initial={false}>
-            {isOpen ? (
-              <motion.svg
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.18 }}
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </motion.svg>
-            ) : (
-              <motion.svg
-                key="robot"
-                initial={{ rotate: 90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-                transition={{ duration: 0.18 }}
-                xmlns="http://www.w3.org/2000/svg"
-                width="26"
-                height="26"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {/* Robot head */}
-                <rect x="3" y="8" width="18" height="12" rx="3" />
-                {/* Antenna */}
-                <line x1="12" y1="8" x2="12" y2="4" />
-                <circle cx="12" cy="3.5" r="1.5" fill="currentColor" />
-                {/* Eyes */}
-                <circle cx="9" cy="13" r="1.5" fill="currentColor" />
-                <circle cx="15" cy="13" r="1.5" fill="currentColor" />
-                {/* Mouth */}
-                <path d="M9 17h6" strokeWidth="2" />
-                {/* Ears */}
-                <line x1="3" y1="14" x2="1" y2="14" />
-                <line x1="21" y1="14" x2="23" y2="14" />
-              </motion.svg>
-            )}
-          </AnimatePresence>
-        </motion.button>
+          {!isOpen && (
+            <motion.button
+              onClick={() => setIsOpen((v) => !v)}
+              className="relative w-14 h-14 rounded-full bg-primaryMed hover:bg-primaryLight text-surface shadow-lg shadow-primaryMed/40 flex items-center justify-center transition-colors duration-200"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{
+                type: "spring",
+                damping: 16,
+                stiffness: 180,
+                delay: 0.6,
+              }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
+              aria-label={isOpen ? "Đóng chat" : "Mở chat AI"}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.svg
+                  key="robot"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="26"
+                  height="26"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {/* Robot head */}
+                  <rect x="3" y="8" width="18" height="12" rx="3" />
+                  {/* Antenna */}
+                  <line x1="12" y1="8" x2="12" y2="4" />
+                  <circle cx="12" cy="3.5" r="1.5" fill="currentColor" />
+                  {/* Eyes */}
+                  <circle cx="9" cy="13" r="1.5" fill="currentColor" />
+                  <circle cx="15" cy="13" r="1.5" fill="currentColor" />
+                  {/* Mouth */}
+                  <path d="M9 17h6" strokeWidth="2" />
+                  {/* Ears */}
+                  <line x1="3" y1="14" x2="1" y2="14" />
+                  <line x1="21" y1="14" x2="23" y2="14" />
+                </motion.svg>
+              </AnimatePresence>
+            </motion.button>
+          )}
         </div>
       </div>
 
@@ -314,8 +313,12 @@ export default function ChatBox() {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    onCompositionStart={() => { isComposing.current = true; }}
-                    onCompositionEnd={() => { isComposing.current = false; }}
+                    onCompositionStart={() => {
+                      isComposing.current = true;
+                    }}
+                    onCompositionEnd={() => {
+                      isComposing.current = false;
+                    }}
                     placeholder="vd: kỹ năng, dự án, email..."
                     rows={1}
                     className={`flex-1 resize-none bg-surface rounded-xl px-3.5 py-2.5 text-sm font-mono text-primaryPale placeholder-primaryLight/30 focus:outline-none transition-colors duration-200 leading-relaxed border ${
@@ -364,7 +367,9 @@ export default function ChatBox() {
                   </p>
                   <span
                     className={`font-mono text-xs tabular-nums ${
-                      inputValue.length > 20 ? "text-red-400" : "text-primaryLight/30"
+                      inputValue.length > 20
+                        ? "text-red-400"
+                        : "text-primaryLight/30"
                     }`}
                   >
                     {inputValue.length}/20

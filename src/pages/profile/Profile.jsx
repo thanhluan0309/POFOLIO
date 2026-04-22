@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import MyAvatar from "../../assets/img/avatar.png";
-import TypingCode from "../../component/Typing/Json";
 import ShinyText from "../../component/Title/ShinyText";
 import ProfileCard from "../../component/Card/ProfileCard";
 
@@ -40,11 +39,6 @@ function Profile() {
     window.dispatchEvent(new CustomEvent("open-chat"));
   }, []);
 
-  const scrollToExperience = useCallback(() => {
-    document
-      .getElementById("experience")
-      ?.scrollIntoView({ behavior: "smooth" });
-  }, []);
 
   return (
     <motion.div
@@ -146,28 +140,6 @@ function Profile() {
         </motion.div>
       </div>
 
-      {/* Coder intro: const me = { ... } */}
-      <motion.section
-        variants={item}
-        className="mt-6 md:mt-10 flex flex-col gap-2"
-        aria-label="About me in code"
-      >
-        <div className="flex items-center gap-2">
-          <span className="typography-caption uppercase tracking-wider text-primaryLight/70 font-mono">
-            me.js
-          </span>
-          <span
-            className="h-px flex-1 max-w-24 bg-border/60"
-            aria-hidden="true"
-          />
-        </div>
-        <TypingCode
-          isVisible={false}
-          setIsVisible={() => {}}
-          onViewMore={scrollToExperience}
-          autoShow
-        />
-      </motion.section>
     </motion.div>
   );
 }

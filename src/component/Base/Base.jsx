@@ -11,10 +11,21 @@ function Base({ children }) {
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (el) {
+      el.style.overflow = "hidden";
+      el.scrollTop = 0;
+    }
     Aos.init({
       duration: 1200,
       once: true,
       delay: 150,
+    });
+    requestAnimationFrame(() => {
+      if (el) {
+        el.scrollTop = 0;
+        el.style.overflow = "";
+      }
     });
   }, []);
 

@@ -3,21 +3,11 @@ import TypingCode from "../../component/Typing/Json";
 import { useState } from "react";
 
 const Intro = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div className="App w-full h-[100vh] bg-primary flex ">
-      <div className="m-auto">
-        <TypingMyself
-          isVisible={isVisible}
-          setIsVisible={setIsVisible}
-        ></TypingMyself>
-
-        <TypingCode
-          isVisible={isVisible}
-          setIsVisible={setIsVisible}
-        ></TypingCode>
-      </div>
+      <div className="m-auto"></div>
     </div>
   );
 };

@@ -50,257 +50,174 @@ const TypingCode = ({
           <>
             <div className="flex justify-between gap-2">
               <TypeAnimation
-                sequence={[
-                  `const`, // Gõ "const Me = {"
-                  // Đợi 1 giây sau khi gõ
-                ]}
+                sequence={[`const`]}
                 wrapper="span"
-                speed={20}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#da587c", // Màu chữ
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#da587c" }}
               />
               <TypeAnimation
-                sequence={[
-                  `me`, // Gõ "const Me = {"
-                  // Đợi 1 giây sau khi gõ
-                ]}
+                sequence={[`me`]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#6a63da", // Màu chữ
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#6a63da" }}
               />
-
               <TypeAnimation
-                sequence={[
-                  " = {", // Gõ "const Me = {"
-                  // Đợi 1 giây sau khi gõ
-                ]}
+                sequence={[" = {"]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#da587c", // Màu chữ
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#da587c" }}
               />
             </div>
             <div className="flex justify-between gap-2">
               <div className="ml-4"></div>
               <TypeAnimation
-                sequence={[
-                  1000,
-                  `FullName: `, // Gõ phần còn lại
-                ]}
+                sequence={[400, `FullName: `]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  fontFamily: "monospace",
-                  display: "inline-block",
-                  color: "#ddebda", // Màu vàng cho phần còn lại
-                }}
+                style={{ fontWeight: 600, fontFamily: "monospace", display: "inline-block", color: "#ddebda" }}
               />
               <TypeAnimation
-                sequence={[1500, `"LÊ TRẦN THÀNH LUÂN",`]}
+                sequence={[600, `"LÊ TRẦN THÀNH LUÂN",`]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#e1f284", // Màu vàng cho chuỗi
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#e1f284" }}
               />
             </div>
             <div className="flex justify-between gap-2">
               <div className="ml-4"></div>
               <TypeAnimation
-                sequence={[
-                  2000,
-                  `Roles: `, // Gõ phần còn lại
-                ]}
+                sequence={[800, `Roles: `]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  fontFamily: "monospace",
-                  display: "inline-block",
-                  color: "#ddebda", // Màu vàng cho phần còn lại
-                }}
+                style={{ fontWeight: 600, fontFamily: "monospace", display: "inline-block", color: "#ddebda" }}
               />
               <TypeAnimation
-                sequence={[2500, `"FrontEnd Developer, BackEnd Developer",`]}
+                sequence={[1000, `"FrontEnd Developer, BackEnd Developer",`]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#e1f284", // Màu vàng cho chuỗi
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#e1f284" }}
               />
             </div>
             <div className="flex justify-between gap-2">
               <div className="ml-4"></div>
               <TypeAnimation
-                sequence={[
-                  3000,
-                  `Graduate: `, // Gõ phần còn lại
-                ]}
+                sequence={[1200, `Graduate: `]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  fontFamily: "monospace",
-                  display: "inline-block",
-                  color: "#ddebda", // Màu vàng cho phần còn lại
-                }}
+                style={{ fontWeight: 600, fontFamily: "monospace", display: "inline-block", color: "#ddebda" }}
               />
               <TypeAnimation
-                sequence={[3500, `"2023",`]}
+                sequence={[1400, `"2023",`]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#e1f284", // Màu vàng cho chuỗi
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#e1f284" }}
               />
             </div>
             <div className="flex justify-between gap-2">
               <div className="ml-4"></div>
               <TypeAnimation
-                sequence={[
-                  4000,
-                  `Email: `, // Gõ phần còn lại
-                ]}
+                sequence={[1600, `Email: `]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  fontFamily: "monospace",
-                  display: "inline-block",
-                  color: "#ddebda", // Màu vàng cho phần còn lại
-                }}
+                style={{ fontWeight: 600, fontFamily: "monospace", display: "inline-block", color: "#ddebda" }}
               />
               <TypeAnimation
-                sequence={[4500, `"letranthanhluan03092001@gmail.com",`]}
+                sequence={[1800, `"letranthanhluan03092001@gmail.com",`]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#e1f284", // Màu vàng cho chuỗi
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#e1f284" }}
               />
             </div>
             <div className="flex justify-between gap-2">
               <div className="ml-4"></div>
               <TypeAnimation
-                sequence={[
-                  5000,
-                  `Phone: `, // Gõ phần còn lại
-                ]}
+                sequence={[2000, `Phone: `]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  fontFamily: "monospace",
-                  display: "inline-block",
-                  color: "#ddebda", // Màu vàng cho phần còn lại
-                }}
+                style={{ fontWeight: 600, fontFamily: "monospace", display: "inline-block", color: "#ddebda" }}
               />
               <TypeAnimation
-                sequence={[5500, `"0898521685",`]}
+                sequence={[2200, `"0898521685",`]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#e1f284", // Màu vàng cho chuỗi
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#e1f284" }}
               />
             </div>
-
             <div className="flex justify-between gap-2">
               <div className="ml-4"></div>
               <TypeAnimation
-                sequence={[
-                  6000,
-                  `Position: `, // Gõ phần còn lại
-                ]}
+                sequence={[2400, `Position: `]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  fontFamily: "monospace",
-                  display: "inline-block",
-                  color: "#ddebda", // Màu vàng cho phần còn lại
-                }}
+                style={{ fontWeight: 600, fontFamily: "monospace", display: "inline-block", color: "#ddebda" }}
               />
               <TypeAnimation
-                sequence={[6500, `"HCM City",`]}
+                sequence={[2600, `"HCM City",`]}
                 wrapper="span"
-                speed={50}
+                speed={75}
                 cursor={false}
                 className="text-[10px] md:text-xl"
-                style={{
-                  fontWeight: 600,
-                  display: "inline-block",
-                  color: "#e1f284", // Màu vàng cho chuỗi
-                }}
+                style={{ fontWeight: 600, display: "inline-block", color: "#e1f284" }}
               />
             </div>
-
+            <div className="flex justify-between gap-2">
+              <div className="ml-4"></div>
+              <TypeAnimation
+                sequence={[2800, `Experience: `]}
+                wrapper="span"
+                speed={75}
+                cursor={false}
+                className="text-[10px] md:text-xl"
+                style={{ fontWeight: 600, fontFamily: "monospace", display: "inline-block", color: "#ddebda" }}
+              />
+              <TypeAnimation
+                sequence={[3000, `"${new Date().getFullYear() - 2023}+ years",`]}
+                wrapper="span"
+                speed={75}
+                cursor={false}
+                className="text-[10px] md:text-xl"
+                style={{ fontWeight: 600, display: "inline-block", color: "#e1f284" }}
+              />
+            </div>
             <TypeAnimation
               sequence={[
-                7000,
-                "}", // Gõ dấu kết thúc
-                () => {
-                  setShowButton(true);
-                },
+                3200,
+                "}",
+                () => { setShowButton(true); },
               ]}
               wrapper="span"
-              speed={50}
+              speed={75}
               cursor={false}
               className="text-[10px] md:text-xl"
-              style={{
-                fontWeight: 600,
-                display: "inline-block",
-                color: "#da587c", // Màu chữ
-              }}
+              style={{ fontWeight: 600, display: "inline-block", color: "#da587c" }}
             />
           </>
         ) : (

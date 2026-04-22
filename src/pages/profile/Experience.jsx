@@ -17,11 +17,14 @@ const SKILL_BADGES = [
   { src: "https://cdn.simpleicons.org/go/00ADD8", name: "Go" },
   { src: "https://cdn.simpleicons.org/express/000000", name: "Express.js" },
   { src: "https://cdn.simpleicons.org/tanstack/FF4154", name: "TanStack" },
-  { src: "https://cdn.simpleicons.org/zustand/443E3E", name: "Zustand" },
+  {
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpHj4UwTW4ANSlNjzQOiiOqfDa6kal9RpF0A&s",
+    name: "Zustand",
+  },
   { src: "https://cdn.simpleicons.org/redux/764ABC", name: "Redux" },
   { src: "https://cdn.simpleicons.org/tailwindcss/06B6D4", name: "Tailwind" },
   { src: "https://cdn.simpleicons.org/html5/E34F26", name: "HTML" },
-  { src: "https://cdn.simpleicons.org/css3/1572B6", name: "CSS" },
+  // { src: "https://cdn.simpleicons.org/css3/1572B6", name: "CSS" },
   { src: "https://cdn.simpleicons.org/shadcnui/000000", name: "shadcn" },
   { src: "https://cdn.simpleicons.org/mui/007FFF", name: "MUI" },
   { src: "https://cdn.simpleicons.org/mongodb/47A248", name: "MongoDB" },
@@ -53,49 +56,41 @@ const card = {
   visible: { opacity: 1, y: 0 },
 };
 
-function Experience() {
+export function SkillsSection() {
   return (
-    <div className="w-full py-12 md:py-20">
-      <div className="flex flex-col gap-12 md:gap-16">
-        <section className="flex flex-col gap-8" aria-label="Skills">
-          <Title content="Skills" />
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-          >
-            <LogoLoop logos={SKILL_BADGES} />
-          </motion.div>
-        </section>
-
-        <div
-          className="border-t border-border/40 pt-16 md:pt-24"
-          role="separator"
-          aria-hidden
-        />
-
-        <section className="flex flex-col gap-8" aria-label="Experience">
-          <Title content="Experience" />
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            className="w-full h-[60vh] min-h-[360px] rounded-xl overflow-hidden"
-          >
-            <CircularGallery
-              items={PROJECTS.map((p) => ({ image: p.img, text: p.name }))}
-              bend={3}
-              textColor="#FFEE91"
-              borderRadius={0.05}
-              font="bold 24px 'Roboto Mono', monospace"
-            />
-          </motion.div>
-        </section>
-      </div>
-    </div>
+    <section className="flex flex-col gap-8 w-full" aria-label="Skills">
+      <Title content="Skills" />
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
+      >
+        <LogoLoop logos={SKILL_BADGES} />
+      </motion.div>
+    </section>
   );
 }
 
-export default Experience;
+export function ExperienceSection() {
+  return (
+    <section className="flex flex-col gap-8 w-full" aria-label="Experience">
+      <Title content="Experience" />
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
+        className="w-full h-[60vh] min-h-[360px] rounded-xl overflow-hidden"
+      >
+        <CircularGallery
+          items={PROJECTS.map((p) => ({ image: p.img, text: p.name }))}
+          bend={3}
+          textColor="#FFEE91"
+          borderRadius={0.05}
+          font="bold 24px 'Roboto Mono', monospace"
+        />
+      </motion.div>
+    </section>
+  );
+}
