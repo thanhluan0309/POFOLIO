@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getCached, setCached } from "../../utils/chatCache";
 
 const GREETING =
   "Xin chào! Tôi là AI assistant của Luân. Bạn có thể hỏi tôi về kỹ năng, dự án, kinh nghiệm hoặc thông tin liên hệ của Luân nhé! 😊";
@@ -89,12 +90,16 @@ export default function ChatBox() {
     const userMsg = makeMsg("user", text);
     setMessages((prev) => [...prev, userMsg]);
     setInputValue("");
-    // Reset textarea height về mặc định sau khi clear
-    if (inputRef.current) {
-      inputRef.current.style.height = "auto";
-    }
-    setIsLoading(true);
+    if (inputRef.current) inputRef.current.style.height = "auto";
 
+    // Cache hit — trả lời ngay, không gọi API
+    const cached = getCached(text);
+    if (cached) {
+      setMessages((prev) => [...prev, makeMsg("assistant", cached)]);
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const history = [...messages, userMsg];
       const res = await fetch("/api/chat", {
@@ -106,13 +111,11 @@ export default function ChatBox() {
       if (!res.ok) throw new Error("API error");
       const data = await res.json();
       setMessages((prev) => [...prev, makeMsg("assistant", data.reply)]);
+      setCached(text, data.reply);
     } catch {
       setMessages((prev) => [
         ...prev,
-        makeMsg(
-          "assistant",
-          "Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau nhé!",
-        ),
+        makeMsg("assistant", "Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau nhé!"),
       ]);
     } finally {
       setIsLoading(false);
