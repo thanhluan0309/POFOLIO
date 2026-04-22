@@ -2,6 +2,7 @@ import React, { useEffect, useRef, createContext, useContext } from "react";
 import Navbar from "../navbar/navbar";
 import ContentLeft from "../ContentLeft/ContentLeft";
 import Background from "../Background/Background";
+import ChatBox from "../ChatBox/ChatBox";
 import Aos from "aos";
 
 export const ScrollContainerContext = createContext(null);
@@ -36,6 +37,7 @@ function Base({ children }) {
           </div>
         </div>
       </div>
+      <ChatBox />
     </>
   );
 }

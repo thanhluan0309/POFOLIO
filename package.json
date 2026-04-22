@@ -15,11 +15,15 @@
     "react-type-animation": "^3.2.0",
     "react-typing-animation": "^1.6.2"
   },
+  "proxy": "http://localhost:3002",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently -n api,react -c yellow,cyan \"node dev-api.js\" \"react-scripts start\"",
+    "start:cra": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev:api": "node dev-api.js",
+    "dev": "concurrently -n api,react -c yellow,cyan \"node dev-api.js\" \"react-scripts start\""
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "tailwindcss": "^3.4.16"
   }
 }

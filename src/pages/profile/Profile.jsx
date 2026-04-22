@@ -36,6 +36,10 @@ function Profile() {
     );
   }, []);
 
+  const openAIChat = useCallback(() => {
+    window.dispatchEvent(new CustomEvent("open-chat"));
+  }, []);
+
   const scrollToExperience = useCallback(() => {
     document
       .getElementById("experience")
@@ -109,7 +113,7 @@ function Profile() {
               />
             </p>
           </motion.div>
-          <motion.div variants={item}>
+          <motion.div variants={item} className="flex flex-wrap gap-3 justify-center md:justify-start">
             <motion.button
               type="button"
               onClick={openResume}
@@ -118,6 +122,25 @@ function Profile() {
               whileTap={{ scale: 0.98 }}
             >
               Open my resume
+            </motion.button>
+            <motion.button
+              type="button"
+              onClick={openAIChat}
+              className="mt-1 px-5 py-2.5 rounded-lg border border-primaryMed/60 hover:border-primaryMed text-primaryMed hover:bg-primaryMed/10 font-semibold text-body-sm transition-colors flex items-center gap-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="8" width="18" height="12" rx="3" />
+                <line x1="12" y1="8" x2="12" y2="4" />
+                <circle cx="12" cy="3.5" r="1.5" fill="currentColor" />
+                <circle cx="9" cy="13" r="1.5" fill="currentColor" />
+                <circle cx="15" cy="13" r="1.5" fill="currentColor" />
+                <path d="M9 17h6" strokeWidth="2" />
+                <line x1="3" y1="14" x2="1" y2="14" />
+                <line x1="21" y1="14" x2="23" y2="14" />
+              </svg>
+              My AI Assistant
             </motion.button>
           </motion.div>
         </motion.div>
