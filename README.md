@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Personal Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Portfolio cá nhân xây dựng bằng React, tích hợp AI chatbot (Gemini / OpenRouter) để tương tác với visitor.
 
-## Available Scripts
+## Tech Stack
 
-In the project directory, you can run:
+- **Frontend:** React 19, Tailwind CSS, Framer Motion, GSAP, AOS
+- **AI Chat:** Gemini API hoặc OpenRouter (cấu hình qua `.env`)
+- **Deployment:** Netlify (serverless functions) / Vercel
 
-### `npm start`
+## Cấu trúc dự án
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+├── pages/          # Các section chính (Intro, Background, Profile)
+├── component/      # Components dùng chung (ChatBox, Navbar, Card...)
+├── data/           # Dữ liệu tĩnh (projects, skills, info)
+└── utils/          # Helpers (chat cache...)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+netlify/functions/  # Serverless function xử lý AI chat
+dev-api.js          # Local API server (mock netlify function cho dev)
+```
 
-### `npm test`
+## Cài đặt & Chạy
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Cài dependencies
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Cấu hình AI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Copy file env mẫu và điền API key:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cp .env.example .env
+```
 
-### `npm run eject`
+Chỉnh `.env`:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```env
+# Chọn provider: "gemini" hoặc "openrouter"
+AI_PROVIDER=openrouter
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Nếu dùng OpenRouter
+OPENROUTER_API_KEY=sk-or-...
+OPENROUTER_MODEL=google/gemini-2.0-flash-001
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Nếu dùng Gemini
+GEMINI_API_KEY=...
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Chạy dev
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Lệnh này chạy đồng thời local API server (port 3002) và React app (port 3000).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Mở [http://localhost:3000](http://localhost:3000).
 
-### Code Splitting
+## Build & Deploy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build
+```
 
-### Analyzing the Bundle Size
+Deploy lên **Netlify**: push lên git, Netlify tự detect `netlify.toml` và build.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Deploy lên **Vercel**: push lên git, Vercel detect `vercel.json` và build.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> Nhớ set environment variables (`AI_PROVIDER`, `OPENROUTER_API_KEY`...) trong dashboard của Netlify/Vercel.
