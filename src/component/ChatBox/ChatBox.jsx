@@ -322,7 +322,7 @@ export default function ChatBox() {
                     placeholder="vd: kỹ năng, dự án, email..."
                     rows={1}
                     className={`flex-1 resize-none bg-surface rounded-xl px-3.5 py-2.5 text-sm font-mono text-primaryPale placeholder-primaryLight/30 focus:outline-none transition-colors duration-200 leading-relaxed border ${
-                      inputValue.length > 20
+                      inputValue.length > 200
                         ? "border-red-500/70 focus:border-red-500"
                         : "border-border/50 focus:border-primary/70"
                     }`}
@@ -367,12 +367,12 @@ export default function ChatBox() {
                   </p>
                   <span
                     className={`font-mono text-xs tabular-nums ${
-                      inputValue.length > 20
+                      inputValue.length > 200
                         ? "text-red-400"
                         : "text-primaryLight/30"
                     }`}
                   >
-                    {inputValue.length}/20
+                    {inputValue.length}/200
                   </span>
                 </div>
               </div>

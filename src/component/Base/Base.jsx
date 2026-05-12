@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, createContext, useContext } from "react";
+import React, { useEffect, useRef, createContext } from "react";
 import Navbar from "../navbar/navbar";
 import ContentLeft from "../ContentLeft/ContentLeft";
 import Background from "../Background/Background";
@@ -36,15 +36,15 @@ function Base({ children }) {
         <div className="w-full m-auto h-full flex min-h-0">
           <div className="w-full h-full flex flex-col min-h-0">
             <ContentLeft />
-            <Navbar />
-            <main
-              ref={scrollContainerRef}
-              className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden snap-y snap-mandatory"
-            >
-              <ScrollContainerContext.Provider value={scrollContainerRef}>
+            <ScrollContainerContext.Provider value={scrollContainerRef}>
+              <Navbar />
+              <main
+                ref={scrollContainerRef}
+                className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden snap-y snap-mandatory"
+              >
                 {children}
-              </ScrollContainerContext.Provider>
-            </main>
+              </main>
+            </ScrollContainerContext.Provider>
           </div>
         </div>
       </div>

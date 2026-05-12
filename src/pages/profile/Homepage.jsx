@@ -2,7 +2,11 @@ import { useEffect, useContext, useRef, useCallback } from "react";
 import { motion, useScroll, useSpring, useInView } from "framer-motion";
 import { ScrollContainerContext } from "../../component/Base/Base";
 import Profile from "./Profile";
-import { SkillsSection, ExperienceSection } from "./Experience";
+import {
+  SkillsSection,
+  ExperienceSection,
+  KeyAchievementsSection,
+} from "./Experience";
 import ContactPage from "./Contact";
 import TypingCode from "../../component/Typing/Json";
 import "./style.css";
@@ -105,7 +109,11 @@ export default function HomePage() {
         <ExperienceSection />
       </HomeSection>
 
-      <HomeSection id="contact" index={4}>
+      <HomeSection id="achievements" index={4}>
+        <KeyAchievementsSection />
+      </HomeSection>
+
+      <HomeSection id="contact" index={5}>
         <ContactPage />
       </HomeSection>
 

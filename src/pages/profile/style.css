@@ -4,6 +4,52 @@ code {
   font-style: normal;
 }
 
+/* Animated gradient heading — "Creative Developer" */
+.gradient-heading {
+  background: linear-gradient(
+    90deg,
+    #e2852e 0%,
+    #f5c857 25%,
+    #ffee91 45%,
+    #abe0f0 55%,
+    #ffee91 70%,
+    #f5c857 85%,
+    #e2852e 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 6s linear infinite;
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-heading {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: #abe0f0;
+  }
+}
+
+/* Achievement card icon glow on card hover */
+.group:hover .achievement-icon {
+  box-shadow: 0 0 18px var(--icon-glow, rgba(245, 200, 87, 0.35));
+  transition: box-shadow 0.3s ease;
+}
+
+.achievement-icon {
+  transition: box-shadow 0.3s ease;
+}
+
 ::-webkit-scrollbar {
   height: 6px;
   width: 6px;
@@ -30,9 +76,9 @@ html {
   align-items: center;
   justify-content: center;
   position: relative;
-  /* padding-top: 1.5rem; */
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  contain: layout style;
 }
 
 .home-section > .section-inner {

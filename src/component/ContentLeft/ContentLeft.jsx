@@ -22,7 +22,7 @@ const SOCIAL_LINKS = [
 function ContentLeft() {
   return (
     <div
-      className="fixed left-0 top-1/2 -translate-y-1/2 flex flex-col gap-3 p-2 bg-surfaceElevated border border-r border-border rounded-r-xl shadow-xl z-10"
+      className="hidden md:flex fixed left-0 top-1/2 -translate-y-1/2 flex-col gap-3 p-2 bg-surfaceElevated border border-r border-border rounded-r-xl shadow-xl z-10"
       aria-label="Social links"
     >
       {SOCIAL_LINKS.map(({ href, label, icon, bgClass }) => (

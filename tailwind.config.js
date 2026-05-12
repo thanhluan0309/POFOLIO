@@ -26,19 +26,19 @@ module.exports = {
       },
       fontSize: {
         display: [
-          "clamp(2.5rem, 8vw, 6rem)",
+          "clamp(2rem, 8vw, 6rem)",
           { lineHeight: "1.05", letterSpacing: "-0.02em" },
         ],
         "heading-1": [
-          "clamp(2rem, 4vw, 3.5rem)",
+          "clamp(1.5rem, 4vw, 3.5rem)",
           { lineHeight: "1.15", letterSpacing: "-0.02em" },
         ],
-        "heading-2": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.25" }],
-        "heading-3": ["clamp(1.25rem, 2.5vw, 1.5rem)", { lineHeight: "1.3" }],
-        "body-lg": ["1.125rem", { lineHeight: "1.6" }],
-        body: ["1rem", { lineHeight: "1.6" }],
-        "body-sm": ["0.875rem", { lineHeight: "1.5" }],
-        caption: ["0.75rem", { lineHeight: "1.4" }],
+        "heading-2": ["clamp(1.2rem, 3vw, 2.25rem)", { lineHeight: "1.25" }],
+        "heading-3": ["clamp(1rem, 2.5vw, 1.375rem)", { lineHeight: "1.35" }],
+        "body-lg": ["clamp(1rem, 2vw, 1.125rem)", { lineHeight: "1.6" }],
+        body: ["clamp(0.875rem, 1.8vw, 1rem)", { lineHeight: "1.6" }],
+        "body-sm": ["clamp(0.75rem, 1.5vw, 0.875rem)", { lineHeight: "1.5" }],
+        caption: ["0.7rem", { lineHeight: "1.4" }],
       },
       fontFamily: {
         sans: ["Roboto Mono", "monospace"],
